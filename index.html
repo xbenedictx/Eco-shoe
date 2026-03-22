@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SolePH • Premium Shoes in the Philippines</title>
+    
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Our custom CSS -->
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="bg-zinc-50 text-zinc-900 overflow-x-hidden font-['Inter']">
+
+    <!-- ================== NAVBAR ================== -->
+    <nav class="bg-white border-b border-zinc-200 shadow-sm fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-10 h-10 bg-yellow-500 rounded-2xl flex items-center justify-center text-white text-3xl font-bold font-['Playfair_Display'] shadow-inner">👟</div>
+                    <div>
+                        <span class="font-['Playfair_Display'] text-3xl font-bold tracking-tighter text-yellow-600">SOLE</span>
+                        <span class="font-['Playfair_Display'] text-3xl font-bold tracking-tighter text-zinc-900">PH</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                    <a href="#shop" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Shop</a>
+                    <a href="#categories" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Categories</a>
+                    <a href="#about" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">About</a>
+                    <a href="#stories" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Stories</a>
+                    <a href="#contact" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-x-6">
+                    <div class="relative hidden sm:block">
+                        <input type="text" id="search-input" 
+                               class="bg-zinc-100 border border-zinc-200 focus:border-yellow-500 focus:outline-none pl-10 py-2.5 w-64 rounded-3xl text-sm placeholder-zinc-400"
+                               placeholder="Search shoes...">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-3 text-zinc-400"></i>
+                    </div>
+
+                    <div onclick="toggleCart()" class="relative cursor-pointer group">
+                        <i class="fa-solid fa-shopping-bag text-2xl text-zinc-700 group-hover:text-yellow-600 transition-colors"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-yellow-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow">0</span>
+                    </div>
+
+                    <button id="mobile-menu-btn" class="md:hidden text-2xl text-zinc-700">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-6 py-6 flex flex-col gap-y-6 text-lg font-medium">
+                <a href="#shop" onclick="toggleMobileMenu()" class="text-zinc-700">Shop All Shoes</a>
+                <a href="#categories" onclick="toggleMobileMenu()" class="text-zinc-700">Categories</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="text-zinc-700">Our Story</a>
+                <a href="#stories" onclick="toggleMobileMenu()" class="text-zinc-700">Stories from the Street</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="text-zinc-700">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================== HERO ================== -->
+    <header class="hero-bg h-screen flex items-center justify-center text-white relative">
+        <div class="max-w-4xl mx-auto text-center px-6 hero-content">
+            <h1 class="text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-4 font-['Playfair_Display']">
+                STEP INTO<br>THE PINOY LIFE
+            </h1>
+            <p class="text-xl md:text-2xl max-w-md mx-auto mb-10 text-white/90">
+                Premium sneakers, boots & sandals crafted for every Filipino adventure.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#shop" class="bg-yellow-500 hover:bg-yellow-400 text-zinc-900 font-semibold text-lg px-10 py-5 rounded-3xl flex items-center justify-center gap-x-3 shadow-xl">
+                    SHOP NOW <i class="fa-solid fa-arrow-right"></i>
+                </a>
+                <a href="#about" class="border-2 border-white/80 hover:border-white text-white font-medium text-lg px-8 py-5 rounded-3xl transition-all">
+                    OUR STORY
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================== PRODUCTS ================== -->
+    <section id="shop" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-5xl font-bold tracking-tight mb-12">Featured Kicks</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="products-grid">
+                <!-- Filled by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================== CATEGORIES ================== -->
+    <section id="categories" class="py-20 bg-zinc-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-5xl font-bold tracking-tight mb-12 text-center">Explore Our World</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Sneakers -->
+                <div class="category-card bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                    <div class="h-64 bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center">
+                        <i class="fa-solid fa-shoe-prints text-8xl text-white opacity-80"></i>
+                    </div>
+                    <div class="p-8 text-center">
+                        <h3 class="text-3xl font-bold mb-3">Sneakers</h3>
+                        <p class="text-zinc-600 mb-6">From Manila streets to weekend hangs — lightweight, breathable, and built for everyday Pinoy hustle.</p>
+                        <a href="#shop" class="inline-block bg-yellow-500 hover:bg-yellow-400 text-zinc-900 font-semibold px-8 py-3 rounded-2xl transition-colors">
+                            View Sneakers
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Boots -->
+                <div class="category-card bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                    <div class="h-64 bg-gradient-to-br from-amber-700 to-amber-900 flex items-center justify-center">
+                        <i class="fa-solid fa-mountain text-8xl text-white opacity-80"></i>
+                    </div>
+                    <div class="p-8 text-center">
+                        <h3 class="text-3xl font-bold mb-3">Boots</h3>
+                        <p class="text-zinc-600 mb-6">Durable trail-ready boots perfect for Baguio getaways, rainy days, or that rugged Pinoy adventure look.</p>
+                        <a href="#shop" class="inline-block bg-yellow-500 hover:bg-yellow-400 text-zinc-900 font-semibold px-8 py-3 rounded-2xl transition-colors">
+                            View Boots
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Casual / Lifestyle -->
+                <div class="category-card bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                    <div class="h-64 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+                        <i class="fa-solid fa-person-walking text-8xl text-white opacity-80"></i>
+                    </div>
+                    <div class="p-8 text-center">
+                        <h3 class="text-3xl font-bold mb-3">Casual & Lifestyle</h3>
+                        <p class="text-zinc-600 mb-6">Canvas classics, slip-ons, and everyday kicks that match your jeepney-to-mall-to-karaoke vibe.</p>
+                        <a href="#shop" class="inline-block bg-yellow-500 hover:bg-yellow-400 text-zinc-900 font-semibold px-8 py-3 rounded-2xl transition-colors">
+                            View Casual
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sandals / Summer -->
+                <div class="category-card bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                    <div class="h-64 bg-gradient-to-br from-cyan-400 to-teal-500 flex items-center justify-center">
+                        <i class="fa-solid fa-sandal text-8xl text-white opacity-80"></i>
+                    </div>
+                    <div class="p-8 text-center">
+                        <h3 class="text-3xl font-bold mb-3">Sandals & Slides</h3>
+                        <p class="text-zinc-600 mb-6">Beach-ready, Boracay-proof, and perfect for hot Pinoy summers or quick sari-sari store runs.</p>
+                        <a href="#shop" class="inline-block bg-yellow-500 hover:bg-yellow-400 text-zinc-900 font-semibold px-8 py-3 rounded-2xl transition-colors">
+                            View Sandals
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================== ABOUT ================== -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-5xl font-bold tracking-tight mb-8 font-['Playfair_Display']">Our Story</h2>
+                    <p class="text-lg leading-relaxed mb-6">
+                        SolePH was born in the heart of Quezon City from a simple belief: Filipinos deserve premium footwear that matches our energy, our style, and our journeys — without the overseas price tag.
+                    </p>
+                    <p class="text-lg leading-relaxed mb-6">
+                        We design shoes inspired by the Pinoy life — the jeepney commutes, the weekend barkada trips to Tagaytay, the streetball games at the barangay court, the rainy season hustle, and the beach escapes. Every pair is crafted with durable materials, thoughtful comfort, and that signature Filipino flair.
+                    </p>
+                    <p class="text-lg leading-relaxed mb-8">
+                        From Marikina's shoemaking heritage to modern street culture, we're proud to bring you sneakers, boots, and sandals made for real life — made for the Philippines.
+                    </p>
+                    <div class="flex flex-wrap gap-6">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-yellow-600">2024</div>
+                            <p class="text-sm text-zinc-600">Year Started</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-yellow-600">100%</div>
+                            <p class="text-sm text-zinc-600">Pinoy Inspired</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-yellow-600">QC</div>
+                            <p class="text-sm text-zinc-600">Proudly Based</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <img src="https://picsum.photos/id/1018/800/900" alt="Filipino street culture shoes" class="rounded-3xl shadow-2xl object-cover h-full w-full">
+                    <div class="absolute -bottom-6 -right-6 bg-yellow-500 text-zinc-900 px-8 py-4 rounded-2xl font-bold shadow-lg">
+                        Step into the Pinoy Life
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================== STORIES ================== -->
+    <section id="stories" class="py-20 bg-zinc-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-5xl font-bold tracking-tight mb-12 text-center font-['Playfair_Display']">Stories from the Street</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Story 1 -->
+                <div class="bg-zinc-800 rounded-3xl overflow-hidden">
+                    <img src="https://picsum.photos/id/237/600/400" alt="Streetball in Manila" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3">From Barangay Court to the Streets</h3>
+                        <p class="text-zinc-300 mb-4">
+                            "My Manila Runners have survived countless pickup games, jeepney rides, and late-night lugaw runs. These kicks understand the grind."
+                        </p>
+                        <p class="text-yellow-500 font-medium">— Kuya Jhay, Quezon City</p>
+                    </div>
+                </div>
+
+                <!-- Story 2 -->
+                <div class="bg-zinc-800 rounded-3xl overflow-hidden">
+                    <img src="https://picsum.photos/id/1084/600/400" alt="Baguio trip boots" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3">Conquered Session Road in Baguio</h3>
+                        <p class="text-zinc-300 mb-4">
+                            "Took my Trail Boots up to Baguio — zero blisters, perfect grip on wet roads, and still looked clean for coffee dates. Salamat SolePH!"
+                        </p>
+                        <p class="text-yellow-500 font-medium">— Ate Mika, Makati</p>
+                    </div>
+                </div>
+
+                <!-- Story 3 -->
+                <div class="bg-zinc-800 rounded-3xl overflow-hidden">
+                    <img src="https://picsum.photos/id/825/600/400" alt="Beach sandals" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-3">Boracay Days, Pinoy Nights</h3>
+                        <p class="text-zinc-300 mb-4">
+                            "Our Fiesta Flats went from beach to bar to videoke without missing a beat. Lightweight, stylish, and very Pinoy."
+                        </p>
+                        <p class="text-yellow-500 font-medium">— Carlo, Cebu</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================== CONTACT ================== -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-5xl font-bold tracking-tight mb-8">Get in Touch</h2>
+            <p class="text-xl text-zinc-600 mb-12 max-w-2xl mx-auto">
+                Have questions about sizing, orders, or just want to say what's up? Drop us a message — we're all ears (and feet!).
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-zinc-50 p-8 rounded-3xl">
+                    <i class="fa-solid fa-envelope text-5xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Email Us</h3>
+                    <p class="text-zinc-600">hello@soleph.com</p>
+                </div>
+
+                <div class="bg-zinc-50 p-8 rounded-3xl">
+                    <i class="fa-solid fa-phone text-5xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Call or Text</h3>
+                    <p class="text-zinc-600">+63 917 123 4567</p>
+                </div>
+
+                <div class="bg-zinc-50 p-8 rounded-3xl">
+                    <i class="fa-solid fa-location-dot text-5xl text-yellow-500 mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Visit Us</h3>
+                    <p class="text-zinc-600">Quezon City, Metro Manila</p>
+                </div>
+            </div>
+
+            <form class="max-w-2xl mx-auto grid gap-6">
+                <input type="text" placeholder="Your Name" class="bg-zinc-100 border border-zinc-200 focus:border-yellow-500 focus:outline-none px-6 py-4 rounded-2xl">
+                <input type="email" placeholder="Your Email" class="bg-zinc-100 border border-zinc-200 focus:border-yellow-500 focus:outline-none px-6 py-4 rounded-2xl">
+                <textarea placeholder="Your Message..." rows="5" class="bg-zinc-100 border border-zinc-200 focus:border-yellow-500 focus:outline-none px-6 py-4 rounded-2xl"></textarea>
+                <button type="submit" class="bg-yellow-500 hover:bg-yellow-400 text-zinc-900 font-semibold text-lg py-5 rounded-3xl shadow-xl">
+                    SEND MESSAGE
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================== FOOTER ================== -->
+    <footer class="bg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p>© 2026 SolePH • Made with ❤️ in Quezon City</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/70 hidden flex items-end md:items-center justify-center z-[9999]">
+        <div class="bg-white w-full md:w-96 md:rounded-3xl md:max-h-[85vh] overflow-hidden">
+            <div class="px-6 py-6 border-b flex justify-between items-center">
+                <h3 class="font-semibold text-xl">Your Cart</h3>
+                <button onclick="toggleCart()" class="text-2xl text-zinc-600 hover:text-black">&times;</button>
+            </div>
+            <div id="cart-items" class="p-6 max-h-[400px] overflow-y-auto"></div>
+            <div class="p-6 border-t">
+                <button onclick="checkout()" class="w-full bg-black text-white py-5 rounded-3xl font-medium hover:bg-zinc-800 transition">
+                    CHECKOUT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+</html>
