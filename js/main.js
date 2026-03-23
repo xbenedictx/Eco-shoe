@@ -30,7 +30,7 @@ const products = [
         id: 5, 
         name: "Cebu Slide", 
         price: 649, 
-        image: "images/shoe5.jpg",    
+        image: "images/shoe5.png",    
         category: "sandals" 
     },
     { 
