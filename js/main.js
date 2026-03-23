@@ -1,11 +1,45 @@
-// Sample products (you can expand this array later)
 const products = [
-    { id: 1, name: "Manila Runner", price: 1299, image: "https://picsum.photos/id/201/400/400", category: "sneakers" },
-    { id: 2, name: "Baguio Trail Boot", price: 2499, image: "https://picsum.photos/id/29/400/400", category: "boots" },
-    { id: 3, name: "Commonwealth Canvas", price: 899, image: "https://picsum.photos/id/160/400/400", category: "casual" },
-    { id: 4, name: "Fiesta Flats", price: 799, image: "https://picsum.photos/id/251/400/400", category: "casual" },
-    { id: 5, name: "Cebu Slide", price: 649, image: "https://picsum.photos/id/367/400/400", category: "sandals" },
-    { id: 6, name: "Palawan Trekker", price: 2899, image: "https://picsum.photos/id/411/400/400", category: "boots" },
+    { 
+        id: 1, 
+        name: "Manila Runner", 
+        price: 1299, 
+        image: "images/shoe1.jpg",    
+        category: "sneakers" 
+    },
+    { 
+        id: 2, 
+        name: "Baguio Trail Boot", 
+        price: 2499, 
+        image: "images/shoe2.jpg",    
+        category: "boots" 
+    },
+    { 
+        id: 3, 
+        name: "Commonwealth Canvas", 
+        price: 899, 
+        image: "images/shoe3.jpg",    
+    },
+    { 
+        id: 4, 
+        name: "Fiesta Flats", 
+        price: 799, 
+        image: "images/shoe4.jpg",    
+        category: "casual" 
+    },
+    { 
+        id: 5, 
+        name: "Cebu Slide", 
+        price: 649, 
+        image: "images/shoe5.jpg",    
+        category: "sandals" 
+    },
+    { 
+        id: 6, 
+        name: "Palawan Trekker", 
+        price: 2899, 
+        image: "images/shoe6.jpg",    
+        category: "boots" 
+    },
 ];
 
 let cart = [];
@@ -41,7 +75,7 @@ function renderProducts() {
 function addToCart(id) {
     const product = products.find(p => p.id === id);
     if (product) {
-        cart.push({ ...product }); // copy to avoid reference issues
+        cart.push({ ...product });
         updateCartCount();
         alert(`${product.name} added to cart!`);
     }
@@ -113,7 +147,7 @@ function checkout() {
     toggleCart();
 }
 
-// Mobile menu
+// Mobile 
 function toggleMobileMenu() {
     document.getElementById('mobile-menu').classList.toggle('hidden');
 }
@@ -124,7 +158,7 @@ function init() {
     
     document.getElementById('mobile-menu-btn').addEventListener('click', toggleMobileMenu);
     
-    // Close mobile menu when clicking links (already handled by onclick in HTML)
+    
 }
 
 window.addEventListener('load', init);
