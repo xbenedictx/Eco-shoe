@@ -3,27 +3,27 @@ const products = [
         id: 1, 
         name: "Manila Runner", 
         price: 1299, 
-        image: "images/shoe1.jpg",    
+        image: "images/shoe1.png",    
         category: "sneakers" 
     },
     { 
         id: 2, 
         name: "Baguio Trail Boot", 
         price: 2499, 
-        image: "images/shoe2.jpg",    
+        image: "images/shoe2.png",    
         category: "boots" 
     },
     { 
         id: 3, 
         name: "Commonwealth Canvas", 
         price: 899, 
-        image: "images/shoe3.jpg",    
+        image: "images/shoe3.png",    
     },
     { 
         id: 4, 
         name: "Fiesta Flats", 
         price: 799, 
-        image: "images/shoe4.jpg",    
+        image: "images/shoe4.png",    
         category: "casual" 
     },
     { 
@@ -37,7 +37,7 @@ const products = [
         id: 6, 
         name: "Palawan Trekker", 
         price: 2899, 
-        image: "images/shoe6.jpg",    
+        image: "images/shoe6.png",    
         category: "boots" 
     },
 ];
