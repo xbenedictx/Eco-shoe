@@ -22,58 +22,64 @@
 <body class="bg-zinc-50 text-zinc-900 overflow-x-hidden font-['Inter']">
 
     <!-- ================== NAVBAR ================== -->
-    <nav class="bg-white border-b border-zinc-200 shadow-sm fixed w-full z-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <div class="flex items-center gap-x-3">
-                    <div class="w-10 h-10 bg-yellow-500 rounded-2xl flex items-center justify-center text-white text-3xl font-bold font-['Playfair_Display'] shadow-inner">👟</div>
-                    <div>
-                        <span class="font-['Playfair_Display'] text-3xl font-bold tracking-tighter text-yellow-600">SOLE</span>
-                        <span class="font-['Playfair_Display'] text-3xl font-bold tracking-tighter text-zinc-900">PH</span>
-                    </div>
-                </div>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
-                    <a href="#shop" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Shop</a>
-                    <a href="#categories" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Categories</a>
-                    <a href="#about" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">About</a>
-                    <a href="#stories" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Stories</a>
-                    <a href="#contact" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Contact</a>
-                </div>
-
-                <div class="flex items-center gap-x-6">
-                    <div class="relative hidden sm:block">
-                        <input type="text" id="search-input" 
-                               class="bg-zinc-100 border border-zinc-200 focus:border-yellow-500 focus:outline-none pl-10 py-2.5 w-64 rounded-3xl text-sm placeholder-zinc-400"
-                               placeholder="Search shoes...">
-                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-3 text-zinc-400"></i>
-                    </div>
-
-                    <div onclick="toggleCart()" class="relative cursor-pointer group">
-                        <i class="fa-solid fa-shopping-bag text-2xl text-zinc-700 group-hover:text-yellow-600 transition-colors"></i>
-                        <span id="cart-count" class="absolute -top-1 -right-1 bg-yellow-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow">0</span>
-                    </div>
-
-                    <button id="mobile-menu-btn" class="md:hidden text-2xl text-zinc-700">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
+<nav class="bg-white border-b border-zinc-200 shadow-sm fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="flex items-center justify-between h-16">
+            <!-- Logo -->
+            <div class="flex items-center gap-x-3">
+                <div class="w-10 h-10 bg-yellow-500 rounded-2xl flex items-center justify-center text-white text-3xl font-bold font-['Playfair_Display'] shadow-inner">👟</div>
+                <div>
+                    <span class="font-['Playfair_Display'] text-3xl font-bold tracking-tighter text-yellow-600">SOLE</span>
+                    <span class="font-['Playfair_Display'] text-3xl font-bold tracking-tighter text-zinc-900">PH</span>
                 </div>
             </div>
-        </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
-            <div class="px-6 py-6 flex flex-col gap-y-6 text-lg font-medium">
-                <a href="#shop" onclick="toggleMobileMenu()" class="text-zinc-700">Shop All Shoes</a>
-                <a href="#categories" onclick="toggleMobileMenu()" class="text-zinc-700">Categories</a>
-                <a href="#about" onclick="toggleMobileMenu()" class="text-zinc-700">Our Story</a>
-                <a href="#stories" onclick="toggleMobileMenu()" class="text-zinc-700">Stories from the Street</a>
-                <a href="#contact" onclick="toggleMobileMenu()" class="text-zinc-700">Contact Us</a>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                <a href="#shop" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Shop</a>
+                <a href="#categories" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Categories</a>
+                <a href="#about" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">About</a>
+                <a href="#stories" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Stories</a>
+                <a href="#contact" class="nav-link text-zinc-700 hover:text-zinc-900 transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-x-6">
+                <!-- Search -->
+                <div class="relative hidden sm:block">
+                    <input type="text" id="search-input" 
+                           class="bg-zinc-100 border border-zinc-200 focus:border-yellow-500 focus:outline-none pl-10 py-2.5 w-64 rounded-3xl text-sm placeholder-zinc-400"
+                           placeholder="Search shoes...">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-3 text-zinc-400"></i>
+                </div>
+
+                <!-- Cart -->
+                <div onclick="toggleCart()" class="relative cursor-pointer group">
+                    <i class="fa-solid fa-shopping-bag text-2xl text-zinc-700 group-hover:text-yellow-600 transition-colors"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-yellow-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full shadow">0</span>
+                </div>
+
+                <!-- User Section (Login / Logout) -->
+                <div id="user-section" class="flex items-center"></div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-2xl text-zinc-700">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
             </div>
         </div>
-    </nav>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+        <div class="px-6 py-6 flex flex-col gap-y-6 text-lg font-medium">
+            <a href="#shop" onclick="toggleMobileMenu()" class="text-zinc-700">Shop All Shoes</a>
+            <a href="#categories" onclick="toggleMobileMenu()" class="text-zinc-700">Categories</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="text-zinc-700">Our Story</a>
+            <a href="#stories" onclick="toggleMobileMenu()" class="text-zinc-700">Stories from the Street</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="text-zinc-700">Contact Us</a>
+        </div>
+    </div>
+</nav>
 
     <!-- ================== HERO ================== -->
     <header class="hero-bg h-screen flex items-center justify-center text-white relative">

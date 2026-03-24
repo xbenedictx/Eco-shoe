@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login • SolePH</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="bg-zinc-50 font-['Inter'] min-h-screen flex items-center justify-center">
+
+    <div class="max-w-md w-full mx-auto px-6 py-12">
+        <!-- Logo -->
+        <div class="flex justify-center mb-10">
+            <div class="flex items-center gap-x-3">
+                <div class="w-14 h-14 bg-yellow-500 rounded-3xl flex items-center justify-center text-white text-5xl shadow-inner">👟</div>
+                <div>
+                    <span class="font-['Playfair_Display'] text-5xl font-bold tracking-tighter text-yellow-600">SOLE</span>
+                    <span class="font-['Playfair_Display'] text-5xl font-bold tracking-tighter text-zinc-900">PH</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-3xl shadow-2xl p-10">
+            <h2 class="text-3xl font-bold text-center mb-2">Welcome Back</h2>
+            <p class="text-zinc-500 text-center mb-8" id="role-text">Sign in as Buyer</p>
+
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-zinc-700 mb-2">Email or Username</label>
+                    <input type="text" id="username" 
+                           class="w-full px-6 py-4 bg-zinc-100 border border-zinc-200 focus:border-yellow-500 rounded-3xl focus:outline-none text-lg"
+                           placeholder="e.g. juan.delacruz@gmail.com" required>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-zinc-700 mb-2">Password</label>
+                    <input type="password" id="password" 
+                           class="w-full px-6 py-4 bg-zinc-100 border border-zinc-200 focus:border-yellow-500 rounded-3xl focus:outline-none text-lg"
+                           placeholder="••••••••" required>
+                </div>
+
+                <button type="submit"
+                        class="w-full bg-yellow-500 hover:bg-yellow-400 text-zinc-900 font-semibold py-4 rounded-3xl text-lg transition-all duration-200">
+                    SIGN IN
+                </button>
+            </form>
+
+            <!-- Role Toggle -->
+            <div class="mt-10">
+                <p class="text-center text-sm text-zinc-500 mb-4">Login as:</p>
+                <div class="grid grid-cols-2 gap-4">
+                    <button id="buyer-btn"
+                            onclick="setRole('buyer')"
+                            class="py-4 border-2 rounded-3xl font-medium transition-all active-role">
+                        👤 Buyer
+                    </button>
+                    <button id="admin-btn"
+                            onclick="setRole('admin')"
+                            class="py-4 border-2 border-zinc-300 hover:border-zinc-400 rounded-3xl font-medium transition-all">
+                        ⚙️ Admin
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center mt-8 text-sm">
+                <span class="text-zinc-500">Don't have an account?</span> 
+                <a href="#" class="text-yellow-600 hover:text-yellow-700 font-medium">Sign up free</a>
+            </div>
+        </div>
+
+        <p class="text-center text-xs text-zinc-400 mt-10">
+            © 2026 SolePH • Made with ❤️ in Urdaneta City
+        </p>
+    </div>
+
+    <script>
+        let currentRole = 'buyer';   // default role
+
+        function setRole(role) {
+            currentRole = role;
+
+            // Update active button styles
+            const buyerBtn = document.getElementById('buyer-btn');
+            const adminBtn = document.getElementById('admin-btn');
+            const roleText = document.getElementById('role-text');
+
+            if (role === 'buyer') {
+                buyerBtn.classList.add('active-role', 'border-yellow-500', 'text-yellow-600');
+                buyerBtn.classList.remove('border-zinc-300');
+                
+                adminBtn.classList.remove('active-role', 'border-yellow-500', 'text-yellow-600');
+                adminBtn.classList.add('border-zinc-300');
+                
+                roleText.textContent = 'Sign in as Buyer';
+            } else {
+                adminBtn.classList.add('active-role', 'border-yellow-500', 'text-yellow-600');
+                adminBtn.classList.remove('border-zinc-300');
+                
+                buyerBtn.classList.remove('active-role', 'border-yellow-500', 'text-yellow-600');
+                buyerBtn.classList.add('border-zinc-300');
+                
+                roleText.textContent = 'Sign in as Admin';
+            }
+        }
+
+        function login() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!username || !password) {
+                alert("Please enter both username/email and password.");
+                return;
+            }
+
+            if (currentRole === 'buyer') {
+                // Buyer can login with any credentials (demo)
+                localStorage.setItem('userRole', 'buyer');
+                localStorage.setItem('username', username.split('@')[0] || 'Buyer');
+                window.location.href = 'index.html';
+            } 
+            else if (currentRole === 'admin') {
+                // Strict admin credentials
+                if (username.toLowerCase() === 'admin' && password === 'admin123') {
+                    localStorage.setItem('userRole', 'admin');
+                    localStorage.setItem('username', 'Admin');
+                    window.location.href = 'index.html';
+                } else {
+                    alert("❌ Invalid Admin credentials!");
+                    // Clear password field for security
+                    document.getElementById('password').value = '';
+                    return;
+                }
+            }
+        }
+
+        // Form submit
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            login();
+        });
+
+        // Initialize with Buyer selected
+        window.addEventListener('load', () => {
+            setRole('buyer');
+        });
+    </script>
+
+    <style>
+        .active-role {
+            border-color: rgb(234 179 8);
+            color: rgb(234 179 8);
+            background-color: #fefce8;
+        }
+    </style>
+</body>
+</html>

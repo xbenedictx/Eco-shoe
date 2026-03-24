@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Dashboard • SolePH</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="bg-zinc-100 font-['Inter']">
+
+    <!-- Top Bar -->
+    <div class="bg-white border-b shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-yellow-500 rounded-2xl flex items-center justify-center text-white text-3xl">👟</div>
+                <div>
+                    <span class="font-['Playfair_Display'] text-3xl font-bold tracking-tighter">SOLE</span>
+                    <span class="font-['Playfair_Display'] text-3xl font-bold tracking-tighter text-yellow-600">PH</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <!-- Back to Shop Button -->
+                <a href="index.html" 
+                   class="flex items-center gap-2 bg-white border border-zinc-300 hover:border-yellow-500 hover:text-yellow-600 px-6 py-2.5 rounded-3xl text-sm font-medium transition-all">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Back to Shop</span>
+                </a>
+
+                <!-- Logout -->
+                <button onclick="logout()" 
+                        class="flex items-center gap-2 bg-red-100 hover:bg-red-200 text-red-700 px-6 py-2.5 rounded-3xl text-sm font-medium transition-all">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 py-10">
+        <div class="flex justify-between items-end mb-10">
+            <div>
+                <h1 class="text-4xl font-bold tracking-tight">Admin Dashboard</h1>
+                <p class="text-zinc-600 mt-2">Manage your featured kicks</p>
+            </div>
+            <div id="product-count" class="text-sm text-zinc-500 font-medium"></div>
+        </div>
+
+        <!-- Add New Product -->
+        <div class="bg-white rounded-3xl shadow p-8 mb-12">
+            <h2 class="text-2xl font-semibold mb-6 flex items-center gap-3">
+                <i class="fa-solid fa-plus text-yellow-500"></i> 
+                Add New Featured Kick
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-zinc-700 mb-2">Product Name</label>
+                    <input id="new-name" type="text" 
+                           class="w-full px-5 py-4 border border-zinc-300 rounded-3xl focus:outline-none focus:border-yellow-500"
+                           placeholder="e.g. Makati Lows">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-zinc-700 mb-2">Price (₱)</label>
+                    <input id="new-price" type="number" 
+                           class="w-full px-5 py-4 border border-zinc-300 rounded-3xl focus:outline-none focus:border-yellow-500"
+                           placeholder="1499">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-zinc-700 mb-2">Image Filename</label>
+                    <input id="new-image" type="text" 
+                           class="w-full px-5 py-4 border border-zinc-300 rounded-3xl focus:outline-none focus:border-yellow-500"
+                           placeholder="shoe7.png">
+                </div>
+            </div>
+
+            <button onclick="addNewProduct()" 
+                    class="mt-8 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-10 py-4 rounded-3xl transition-all flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i>
+                Add to Featured Kicks
+            </button>
+        </div>
+
+        <!-- Manage Products -->
+        <div class="bg-white rounded-3xl shadow overflow-hidden">
+            <div class="px-8 py-6 border-b bg-zinc-50 flex justify-between items-center">
+                <h2 class="text-2xl font-semibold">Current Featured Kicks</h2>
+            </div>
+            
+            <div id="admin-products-list" class="divide-y"></div>
+        </div>
+    </div>
+
+    <script>
+        // Load products from localStorage (shared with main.js)
+        let products = JSON.parse(localStorage.getItem('products')) || [
+            { id: 1, name: "Manila Runner", price: 1299, image: "images/shoe1.png", category: "sneakers" },
+            { id: 2, name: "Baguio Trail Boot", price: 2499, image: "images/shoe2.png", category: "boots" },
+            { id: 3, name: "Commonwealth Canvas", price: 899, image: "images/shoe3.png" },
+            { id: 4, name: "Fiesta Flats", price: 799, image: "images/shoe4.png", category: "casual" },
+            { id: 5, name: "Cebu Slide", price: 649, image: "images/shoe5.png", category: "sandals" },
+            { id: 6, name: "Palawan Trekker", price: 2899, image: "images/shoe6.png", category: "boots" },
+        ];
+
+        function saveProducts() {
+            localStorage.setItem('products', JSON.stringify(products));
+        }
+
+        function renderAdminProducts() {
+            const container = document.getElementById('admin-products-list');
+            container.innerHTML = '';
+            
+            document.getElementById('product-count').textContent = `${products.length} products`;
+
+            if (products.length === 0) {
+                container.innerHTML = `<p class="p-12 text-center text-zinc-400">No products yet.</p>`;
+                return;
+            }
+
+            products.forEach((product, index) => {
+                const div = document.createElement('div');
+                div.className = 'px-8 py-6 flex items-center gap-6 hover:bg-zinc-50 transition-colors';
+                div.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" 
+                         class="w-20 h-20 object-cover rounded-2xl border border-zinc-100">
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-lg">${product.name}</h4>
+                        <p class="text-yellow-600 font-bold">₱${product.price.toLocaleString()}</p>
+                    </div>
+                    <button onclick="deleteProduct(${index})" 
+                            class="flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 px-6 py-3 rounded-2xl transition-all">
+                        <i class="fa-solid fa-trash-can"></i>
+                        <span class="font-medium">Remove</span>
+                    </button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        function addNewProduct() {
+            const name = document.getElementById('new-name').value.trim();
+            const priceStr = document.getElementById('new-price').value.trim();
+            const image = document.getElementById('new-image').value.trim();
+
+            if (!name || !priceStr || !image) {
+                alert("Please fill in all fields");
+                return;
+            }
+
+            const price = parseInt(priceStr);
+            if (isNaN(price) || price <= 0) {
+                alert("Please enter a valid price");
+                return;
+            }
+
+            const newProduct = {
+                id: Date.now(),
+                name: name,
+                price: price,
+                image: image.startsWith('images/') ? image : `images/${image}`,
+                category: "sneakers"
+            };
+
+            products.push(newProduct);
+            saveProducts();
+            renderAdminProducts();
+
+            // Clear inputs
+            document.getElementById('new-name').value = '';
+            document.getElementById('new-price').value = '';
+            document.getElementById('new-image').value = '';
+
+            alert(`✅ "${name}" has been added successfully!`);
+        }
+
+        function deleteProduct(index) {
+            if (confirm(`Are you sure you want to delete "${products[index].name}"?`)) {
+                products.splice(index, 1);
+                saveProducts();
+                renderAdminProducts();
+            }
+        }
+
+        function logout() {
+            if (confirm("Logout from Admin Dashboard?")) {
+                localStorage.removeItem('userRole');
+                localStorage.removeItem('username');
+                window.location.href = 'login.html';
+            }
+        }
+
+        // Protect route - only allow admin
+        function checkAdminAccess() {
+            const role = localStorage.getItem('userRole');
+            if (role !== 'admin') {
+                alert("Access Denied! Only admins can view this page.");
+                window.location.href = 'login.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Initialize Admin Panel
+        window.addEventListener('load', () => {
+            if (!checkAdminAccess()) return;
+            renderAdminProducts();
+        });
+    </script>
+</body>
+</html>
